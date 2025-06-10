@@ -34,10 +34,7 @@
   </tr>
 </table>
 
-<p style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-  <img src="https://github-readme-stats.vercel.app/api?username=kaliszsatinfo&rank_icon=github&theme=github_dark" style="max-width: 100%; height: auto;"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaliszsatinfo&layout=compact&langs_count=10&theme=github_dark" style="max-width: 100%; height: auto;"/>
-  <a href="https://github.com/orgs/SchoolStuffProjects/repositories" title="Finished school projects" style="margin-left: auto;">
-    <img src="https://github.com/user-attachments/assets/6ae8ea80-28dd-497e-8c2c-d4f06d1e88f7"style="width: 85px; height: 195px; object-fit: cover;" />
-  </a>
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=kaliszsatinfo&rank_icon=github&theme=github_dark"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaliszsatinfo&layout=compact&langs_count=10&theme=github_dark"/>
 </p>
