@@ -44,10 +44,11 @@ def clone_repo(git_url, name):
     return target_path
 
 def run_cloc(path):
-    exclude_dirs_str = ",".join(EXCLUDE_DIRS)
-    result = subprocess.run(
-        ["cloc", path, f"--exclude-dir={exclude_dirs_str}", "--json"],
-        capture_output=True, text=True)
+    result = subprocess.run([
+        "cloc", path,
+        "--json",
+        "--exclude-dir=node_modules,dist,build,out,.next,.vercel"
+    ], capture_output=True, text=True)
     try:
         cloc_data = json.loads(result.stdout)
         return cloc_data
