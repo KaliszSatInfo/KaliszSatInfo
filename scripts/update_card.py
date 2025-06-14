@@ -15,8 +15,6 @@ HEADERS = {
 
 TEMP_DIR = "temp_repos"
 
-EXCLUDE_DIRS = ["node_modules", "vendor", ".git", "dist", "build", "out"]
-
 def reset_temp_dir():
     if os.path.exists(TEMP_DIR):
         subprocess.run(["rm", "-rf", TEMP_DIR])
@@ -48,7 +46,7 @@ def run_cloc(path):
         "node_modules", "dist", "build", "out", ".next", ".output", "target", "vendor",
         "__pycache__", "storage", "var", "generated", "bin", "obj", "cache", ".venv",
         ".mypy_cache", ".pytest_cache", ".gradle", ".idea", ".dart_tool", "gen",
-        "Packages", "Pods", "Carthage", ".parcel-cache"
+        "Packages", "Pods", "Carthage", ".parcel-cache", ".git"
     ]
 
     exclude_dir_str = ",".join(exclude_dirs)
@@ -104,11 +102,23 @@ def aggregate_language_data(repos):
 
     return repo_language_data
 
+def compute_language_stats(repo_language_data):
+    lang_repo_count = defaultdict(int)
+    lang_loc_sum = defaultdict(int)
+
+    for repo, langs in repo_language_data.items():
+        for lang, loc in langs.items():
+            if loc > 0:
+                lang_repo_count[lang] += 1
+                lang_loc_sum[lang] += loc
+
+    return lang_repo_count, lang_loc_sum
+
 def apply_penalty_formula(repo_language_data):
     penalty_heavy = 0.02
     penalty_generated = 0.1
     penalty_neutral = 1.0
-    penalty_boost = 1.0
+
     heavily_penalized = {
         "YAML", "Markdown", "SVG", "XML", "INI", "Text", 
         "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
@@ -120,8 +130,6 @@ def apply_penalty_formula(repo_language_data):
         "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
         "vim script", "diff", "Handlebars"
     }
-    
-    boosted_langs = set()
     
     adjusted_scores = defaultdict(float)
     
@@ -141,7 +149,6 @@ def apply_penalty_formula(repo_language_data):
                 factor = penalty_neutral
             
             adjusted_score = loc * factor * size_penalty
-                        
             adjusted_scores[lang] += adjusted_score
     
     total = sum(adjusted_scores.values())
@@ -152,12 +159,14 @@ def apply_penalty_formula(repo_language_data):
             normalized[lang] = percent
     return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
 
-def generate_markdown_adjusted(normalized_scores):
+def generate_markdown_with_stats(normalized_scores, repo_counts, loc_sums):
     lines = ["### 📊 Language Usage (Adjusted with Penalties)\n"]
-    lines.append("| Language | Adjusted % |")
-    lines.append("| --- | ---: |")
+    lines.append("| Language | Adjusted % | Repos Using | Total LOC |")
+    lines.append("| --- | ---: | ---: | ---: |")
     for lang, percent in normalized_scores.items():
-        lines.append(f"| {lang} | {percent}% |")
+        repos = repo_counts.get(lang, 0)
+        loc = loc_sums.get(lang, 0)
+        lines.append(f"| {lang} | {percent}% | {repos} | {loc} |")
     return "\n".join(lines)
 
 def update_readme(content):
@@ -180,7 +189,8 @@ def main():
     repos = fetch_repos(GITHUB_USERNAME) + sum([fetch_repos(org, is_org=True) for org in ORGS], [])
     repo_language_data = aggregate_language_data(repos)
     normalized_scores = apply_penalty_formula(repo_language_data)
-    markdown_content = generate_markdown_adjusted(normalized_scores)
+    repo_counts, loc_sums = compute_language_stats(repo_language_data)
+    markdown_content = generate_markdown_with_stats(normalized_scores, repo_counts, loc_sums)
     update_readme(markdown_content)
 
 if __name__ == "__main__":
