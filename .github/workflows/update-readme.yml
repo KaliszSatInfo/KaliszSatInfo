@@ -51,7 +51,8 @@ jobs:
 
       - name: Update README.md
         run: |
-          cat <<'EOF' > usage_content.txt${{ steps.format_usage.outputs.usage }}EOF
+          cat <<'EOF' > usage_content.txt
+          ${{ steps.format_usage.outputs.usage }}EOF
 
           start="<!-- START_SECTION:language-usage -->"
           end="<!-- END_SECTION:language-usage -->"
