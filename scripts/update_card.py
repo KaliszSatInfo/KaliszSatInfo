@@ -226,6 +226,10 @@ def main():
     normalized_scores = apply_penalty_formula(repo_language_data)
     repo_counts, loc_sums = compute_language_stats(repo_language_data)
 
+    normalized_scores.pop("JSON", None)
+    repo_counts.pop("JSON", None)
+    loc_sums.pop("JSON", None)
+
     generate_language_bar_image(normalized_scores)
 
     markdown_content = generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums)
