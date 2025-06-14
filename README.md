@@ -38,3 +38,6 @@
   <img src="https://github-readme-stats.vercel.app/api?username=kaliszsatinfo&rank_icon=github&theme=github_dark"/>
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaliszsatinfo&layout=compact&langs_count=10&theme=github_dark"/>
 </p>
+
+<!--START_LANGUAGE_CARD-->
+<!--END_LANGUAGE_CARD-->
