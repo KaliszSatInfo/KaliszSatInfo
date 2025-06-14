@@ -17,7 +17,7 @@ jobs:
       - name: Read language usage
         id: read_usage
         run: |
-          USAGE_CONTENT=$(...)  # creates escaped, single-line usage block
+          USAGE_CONTENT=$(awk '{ printf "%s\\n", $0 }' language-usage.md)
           echo "usage=$USAGE_CONTENT" >> $GITHUB_OUTPUT
 
 
