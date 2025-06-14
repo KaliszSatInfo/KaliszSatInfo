@@ -37,7 +37,8 @@ def fetch_repos(user_or_org, is_org=False):
 
 def clone_repo(git_url, name):
     target_path = os.path.join(TEMP_DIR, name)
-    subprocess.run(["git", "clone", "--depth", "1", git_url, target_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["git", "clone", "--depth", "1", git_url, target_path],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return target_path
 
 def run_cloc(path):
@@ -49,7 +50,7 @@ def run_cloc(path):
         return {}
 
 def aggregate_language_data(repos):
-    language_lines = defaultdict(int)
+    repo_language_data = {}
 
     for repo in repos:
         name = repo["name"]
@@ -57,20 +58,73 @@ def aggregate_language_data(repos):
         print(f"Processing: {name}")
         path = clone_repo(url, name)
         cloc_data = run_cloc(path)
+
+        language_lines = {}
         for lang, stats in cloc_data.items():
             if lang in ["header", "SUM"]:
                 continue
-            language_lines[lang] += stats["code"]
+            language_lines[lang] = stats["code"]
+        repo_language_data[name] = language_lines
 
-    return language_lines
+    return repo_language_data
 
-def generate_markdown_raw(language_lines):
-    sorted_langs = sorted(language_lines.items(), key=lambda x: x[1], reverse=True)
-    lines = ["### 📊 Language Usage (Raw Lines of Code)\n"]
-    lines.append("| Language | Lines of Code |")
+def apply_penalty_formula(repo_language_data):
+    penalty_heavy = 0.02
+    penalty_generated = 0.1
+    penalty_neutral = 1.0
+    penalty_boost = 1.5
+
+    heavily_penalized = {
+        "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text",
+        "C", "C++", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
+        "C/C++ Header", "Arduino Sketch", "Visual Studio Solution", "CSV", "Ant"
+    }
+
+    generated_or_config = {
+        "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
+        "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
+        "vim script", "diff", "Handlebars"
+    }
+
+    boosted_langs = {
+        "JavaScript", "TypeScript", "Python", "PHP", "Java", "C#", "HTML",
+        "CSS", "SQL", "make", "EJS", "Vuejs Component", "ASP.NET",
+        "Bourne Shell", "Bourne Again Shell"
+    }
+
+    adjusted_scores = defaultdict(float)
+
+    repo_sizes = {repo: sum(langs.values()) for repo, langs in repo_language_data.items()}
+    max_repo_size = max(repo_sizes.values()) if repo_sizes else 1
+
+    for repo, langs in repo_language_data.items():
+        repo_size = repo_sizes[repo]
+        size_penalty = 1 / (1 + (repo_size / max_repo_size) ** 2.5)
+
+        for lang, loc in langs.items():
+            if lang in heavily_penalized:
+                factor = penalty_heavy
+            elif lang in generated_or_config:
+                factor = penalty_generated
+            elif lang in boosted_langs:
+                factor = penalty_boost
+            else:
+                factor = penalty_neutral
+
+            adjusted_score = loc * factor * size_penalty
+            adjusted_scores[lang] += adjusted_score
+
+    total = sum(adjusted_scores.values())
+    normalized = {lang: round(score / total * 100, 2)
+                  for lang, score in adjusted_scores.items() if score > 0.5}
+    return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
+
+def generate_markdown_adjusted(normalized_scores):
+    lines = ["### 📊 Language Usage (Adjusted with Penalties)\n"]
+    lines.append("| Language | Adjusted % |")
     lines.append("| --- | ---: |")
-    for lang, loc in sorted_langs:
-        lines.append(f"| {lang} | {loc} |")
+    for lang, percent in normalized_scores.items():
+        lines.append(f"| {lang} | {percent}% |")
     return "\n".join(lines)
 
 def update_readme(content):
@@ -91,8 +145,9 @@ def update_readme(content):
 def main():
     reset_temp_dir()
     repos = fetch_repos(GITHUB_USERNAME) + sum([fetch_repos(org, is_org=True) for org in ORGS], [])
-    language_lines = aggregate_language_data(repos)
-    markdown_content = generate_markdown_raw(language_lines)
+    repo_language_data = aggregate_language_data(repos)
+    normalized_scores = apply_penalty_formula(repo_language_data)
+    markdown_content = generate_markdown_adjusted(normalized_scores)
     update_readme(markdown_content)
 
 if __name__ == "__main__":
