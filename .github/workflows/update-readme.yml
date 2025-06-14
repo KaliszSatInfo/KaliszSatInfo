@@ -50,11 +50,9 @@ jobs:
       - name: Update README.md
         run: |
           usage_content="${{ steps.format_usage.outputs.usage }}"
-          echo "$usage_content" > usage_content.txt
-
+          printf "%s" "$usage_content" > usage_content.txt
           start="<!-- START_SECTION:language-usage -->"
           end="<!-- END_SECTION:language-usage -->"
-
           awk -v start="$start" -v end="$end" '
             BEGIN {
               while ((getline line < "usage_content.txt") > 0) {
@@ -81,7 +79,6 @@ jobs:
                 print
             }
           ' README.md > README.tmp && mv README.tmp README.md
-
           rm usage_content.txt
 
       - name: Commit and push changes
