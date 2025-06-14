@@ -39,31 +39,30 @@
 
 | Language | Adjusted % |
 | --- | ---: |
-| PHP | 41.07% |
-| JavaScript | 33.97% |
-| CSS | 14.68% |
-| HTML | 5.32% |
-| JSON | 2.43% |
-| Java | 0.48% |
-| SQL | 0.39% |
-| YAML | 0.32% |
-| C# | 0.29% |
-| LESS | 0.23% |
-| TypeScript | 0.19% |
-| ASP.NET | 0.13% |
-| SCSS | 0.11% |
-| Vuejs Component | 0.06% |
-| Text | 0.05% |
-| Python | 0.05% |
+| PHP | 47.45% |
+| JavaScript | 34.84% |
+| CSS | 7.22% |
+| HTML | 6.14% |
+| JSON | 2.05% |
+| Java | 0.56% |
+| SQL | 0.45% |
+| C# | 0.34% |
+| TypeScript | 0.22% |
+| ASP.NET | 0.14% |
+| LESS | 0.14% |
+| Vuejs Component | 0.07% |
+| Text | 0.06% |
+| Python | 0.06% |
 | Mustache | 0.05% |
-| Unity-Prefab | 0.03% |
-| SVG | 0.03% |
-| Bourne Shell | 0.03% |
+| Unity-Prefab | 0.04% |
+| Bourne Shell | 0.04% |
 | INI | 0.02% |
 | XML | 0.02% |
 | Markdown | 0.02% |
 | Lua | 0.02% |
-| HLSL | 0.0% |
+| HLSL | 0.01% |
+| SVG | 0.01% |
+| YAML | 0.01% |
 | DOS Batch | 0.0% |
 | Maven | 0.0% |
 | FXML | 0.0% |
