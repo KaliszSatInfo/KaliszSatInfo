@@ -46,7 +46,7 @@ def run_cloc(path):
         "node_modules", "dist", "build", "out", ".next", ".output", "target", "vendor",
         "__pycache__", "storage", "var", "generated", "bin", "obj", "cache", ".venv",
         ".mypy_cache", ".pytest_cache", ".gradle", ".idea", ".dart_tool", "gen",
-        "Packages", "Pods", "Carthage", ".parcel-cache", ".git"
+        "Packages", "Pods", "Carthage", ".parcel-cache"
     ]
 
     exclude_dir_str = ",".join(exclude_dirs)
@@ -74,6 +74,7 @@ def run_cloc(path):
         "cloc", path,
         "--json",
         f"--exclude-dir={exclude_dir_str}",
+        f"--exclude-ext=json,json5",
         f"--not-match-f={not_match_f}"
     ], capture_output=True, text=True)
 
@@ -82,6 +83,7 @@ def run_cloc(path):
         return cloc_data
     except json.JSONDecodeError:
         return {}
+
 
 def aggregate_language_data(repos):
     repo_language_data = {}
