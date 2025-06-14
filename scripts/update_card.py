@@ -79,13 +79,13 @@ def apply_penalty_formula(repo_language_data):
     penalty_neutral = 1.0
     penalty_boost = 1.0
     heavily_penalized = {
-        "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text", 
-        "C", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
+        "YAML", "Markdown", "SVG", "XML", "INI", "Text", 
+        "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
         "C/C++ Header", "Arduino Sketch", "Visual Studio Solution", "CSV", "Ant"
     }
     
     generated_or_config = {
-        "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
+        "JSON", "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
         "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
         "vim script", "diff", "Handlebars"
     }
