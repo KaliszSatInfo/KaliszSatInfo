@@ -39,7 +39,5 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaliszsatinfo&layout=compact&langs_count=10&theme=github_dark"/>
 </p>
 
-## Language Usage
-
 <!--LANGUAGE-USAGE-START-->
 <!--LANGUAGE-USAGE-END-->
