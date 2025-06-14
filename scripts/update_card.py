@@ -114,8 +114,11 @@ def apply_penalty_formula(repo_language_data):
             adjusted_scores[lang] += adjusted_score
     
     total = sum(adjusted_scores.values())
-    normalized = {lang: round(score / total * 100, 2)
-                  for lang, score in adjusted_scores.items() if score > 0.5}
+   normalized = {}
+    for lang, score in adjusted_scores.items():
+        percent = round(score / total * 100, 2)
+        if percent > 0.5 or lang in {"Python", "TypeScript"}:
+            normalized[lang] = percent
     return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
 
 
