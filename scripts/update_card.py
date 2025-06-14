@@ -86,25 +86,21 @@ def run_cloc(path):
     except json.JSONDecodeError:
         return {}
 
-def aggregate_language_data(repos, min_loc_threshold=50):
+def aggregate_language_data(repos):
     repo_language_data = {}
-    EXCEPTIONS = {"Python", "TypeScript"}
 
     for repo in repos:
-        name = repo["name"]
-        url = repo["clone_url"]
-        print(f"Processing: {name}")
-        path = clone_repo(url, name)
+        print(f"Processing: {repo['name']}")
+        path = clone_repo(repo["clone_url"], repo["name"])
         cloc_data = run_cloc(path)
 
-        language_lines = {}
-        for lang, stats in cloc_data.items():
-            if lang in ["header", "SUM", "JSON"]:
-                continue
-            if stats["code"] < min_loc_threshold and lang not in EXCEPTIONS:
-                continue
-            language_lines[lang] = stats["code"]
-        repo_language_data[name] = language_lines
+        language_lines = {
+            lang: stats["code"]
+            for lang, stats in cloc_data.items()
+            if lang not in ["header", "SUM"]
+        }
+
+        repo_language_data[repo["name"]] = language_lines
 
     return repo_language_data
 
