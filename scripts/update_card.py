@@ -15,6 +15,8 @@ HEADERS = {
 
 TEMP_DIR = "temp_repos"
 
+EXCLUDE_DIRS = ["node_modules", "vendor", ".git", "dist", "build", "out"]
+
 def reset_temp_dir():
     if os.path.exists(TEMP_DIR):
         subprocess.run(["rm", "-rf", TEMP_DIR])
@@ -42,7 +44,10 @@ def clone_repo(git_url, name):
     return target_path
 
 def run_cloc(path):
-    result = subprocess.run(["cloc", path, "--json"], capture_output=True, text=True)
+    exclude_dirs_str = ",".join(EXCLUDE_DIRS)
+    result = subprocess.run(
+        ["cloc", path, f"--exclude-dir={exclude_dirs_str}", "--json"],
+        capture_output=True, text=True)
     try:
         cloc_data = json.loads(result.stdout)
         return cloc_data
@@ -73,7 +78,6 @@ def apply_penalty_formula(repo_language_data):
     penalty_generated = 0.1
     penalty_neutral = 1.0
     penalty_boost = 1.0
-    
     heavily_penalized = {
         "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text",
         "C", "C++", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
@@ -106,18 +110,7 @@ def apply_penalty_formula(repo_language_data):
                 factor = penalty_neutral
             
             adjusted_score = loc * factor * size_penalty
-            
-            if lang == "Java":
-                adjusted_score *= 7.5
-            elif lang == "TypeScript":
-                adjusted_score *= 1.7
-            elif lang == "JavaScript":
-                adjusted_score *= 0.5
-            elif lang == "Python":
-                adjusted_score *= 1.2
-            elif lang == "C#":
-                adjusted_score *= 1.3
-            
+                        
             adjusted_scores[lang] += adjusted_score
     
     total = sum(adjusted_scores.values())
