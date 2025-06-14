@@ -39,12 +39,11 @@
 
 | Language | Adjusted % |
 | --- | ---: |
-| PHP | 43.85% |
-| JavaScript | 32.2% |
-| JSON | 9.47% |
-| CSS | 6.68% |
-| HTML | 5.68% |
-| Java | 0.52% |
-| TypeScript | 0.2% |
+| PHP | 50.33% |
+| JavaScript | 28.04% |
+| JSON | 9.05% |
+| CSS | 5.78% |
+| HTML | 4.91% |
+| TypeScript | 0.18% |
 | Python | 0.05% |
 <!-- END_SECTION:language-usage -->
