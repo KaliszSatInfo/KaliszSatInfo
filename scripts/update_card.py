@@ -48,7 +48,6 @@ def run_cloc(path):
         ".mypy_cache", ".pytest_cache", ".gradle", ".idea", ".dart_tool", "gen",
         "Packages", "Pods", "Carthage", ".parcel-cache"
     ]
-
     exclude_dir_str = ",".join(exclude_dirs)
 
     not_match_f = (
@@ -56,6 +55,8 @@ def run_cloc(path):
         r".*\.map$|"
         r".*\.d\.ts$|"
         r".*\.pyc$|"
+        r".*\.pyo$|"
+        r".*\.egg-info$|"
         r".*\.class$|"
         r".*\.dll$|"
         r".*\.exe$|"
@@ -74,7 +75,6 @@ def run_cloc(path):
         "cloc", path,
         "--json",
         f"--exclude-dir={exclude_dir_str}",
-        f"--exclude-ext=json,json5",
         f"--not-match-f={not_match_f}"
     ], capture_output=True, text=True)
 
@@ -85,24 +85,26 @@ def run_cloc(path):
         return {}
 
 
-def aggregate_language_data(repos):
+def aggregate_language_data(repos, min_loc_threshold=50):
     repo_language_data = {}
-
     for repo in repos:
         name = repo["name"]
         url = repo["clone_url"]
         print(f"Processing: {name}")
         path = clone_repo(url, name)
         cloc_data = run_cloc(path)
-
+        
         language_lines = {}
         for lang, stats in cloc_data.items():
             if lang in ["header", "SUM"]:
                 continue
+            if stats["code"] < min_loc_threshold:
+                continue
             language_lines[lang] = stats["code"]
         repo_language_data[name] = language_lines
-
+        
     return repo_language_data
+
 
 def compute_language_stats(repo_language_data):
     lang_repo_count = defaultdict(int)
