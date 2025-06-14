@@ -50,7 +50,6 @@ def run_cloc(path):
 
 def aggregate_language_data(repos):
     language_lines = defaultdict(int)
-    repo_count = defaultdict(int)
 
     for repo in repos:
         name = repo["name"]
@@ -62,22 +61,17 @@ def aggregate_language_data(repos):
             if lang in ["header", "SUM"]:
                 continue
             language_lines[lang] += stats["code"]
-            repo_count[lang] += 1
 
-    return language_lines, repo_count
+    return language_lines
 
-def compute_weighted_usage(language_lines, repo_count):
-    total_lines = sum(language_lines.values())
-    total_repos = sum(repo_count.values())
-    weighted = {}
-
-    for lang in language_lines:
-        loc_share = language_lines[lang] / total_lines if total_lines else 0
-        repo_share = repo_count[lang] / total_repos if total_repos else 0
-        weight = 0.7 * repo_share + 0.3 * loc_share
-        weighted[lang] = weight
-
-    return dict(sorted(weighted.items(), key=lambda x: x[1], reverse=True))
+def generate_markdown_raw(language_lines):
+    sorted_langs = sorted(language_lines.items(), key=lambda x: x[1], reverse=True)
+    lines = ["### 📊 Language Usage (Raw Lines of Code)\n"]
+    lines.append("| Language | Lines of Code |")
+    lines.append("| --- | ---: |")
+    for lang, loc in sorted_langs:
+        lines.append(f"| {lang} | {loc} |")
+    return "\n".join(lines)
 
 def update_readme(content):
     start_marker = "<!-- START_SECTION:language-usage -->"
@@ -97,16 +91,8 @@ def update_readme(content):
 def main():
     reset_temp_dir()
     repos = fetch_repos(GITHUB_USERNAME) + sum([fetch_repos(org, is_org=True) for org in ORGS], [])
-    language_lines, repo_count = aggregate_language_data(repos)
-    weighted = compute_weighted_usage(language_lines, repo_count)
-
-    bar = ""
-    total = sum(weighted.values())
-    for lang, score in weighted.items():
-        percent = round(score / total * 100, 1) if total else 0
-        bar += f"{lang} [{percent}%] " + "█" * int(percent / 5) + "\n"
-
-    markdown_content = "### 📊 **Weighted Language Usage**\n\n```\n" + bar + "```\n"
+    language_lines = aggregate_language_data(repos)
+    markdown_content = generate_markdown_raw(language_lines)
     update_readme(markdown_content)
 
 if __name__ == "__main__":
