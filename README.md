@@ -40,4 +40,6 @@
 </p>
 
 <!-- START_SECTION:language-usage -->
+### 📊 **Weighted Language Usage**\n\n```\nJavaScript [12.8%] ██\nJSON [12.7%] ██\nXML [10.8%] ██\nJava [8.6%] █\nText [8.1%] █\nPHP [7.6%] █\nMarkdown [5.0%] █\nCSS [4.2%] \nHTML [3.6%] \nYAML [2.9%] \nSQL [2.4%] \nSVG [2.0%] \nLESS [1.4%] \nTypeScript [1.3%] \nINI [1.3%] \nPython [1.1%] \nBourne Shell [1.0%] \nDOS Batch [1.0%] \nSCSS [0.8%] \nmake [0.7%] \nC# [0.5%] \nXSD [0.5%] \nreStructuredText [0.5%] \nProperties [0.5%] \nBourne Again Shell [0.5%] \nPowerShell [0.5%] \ndiff [0.5%] \nCSV [0.5%] \nC [0.3%] \nLua [0.3%] \nC/C++ Header [0.3%] \nUnity-Prefab [0.3%] \nC++ [0.3%] \nHLSL [0.3%] \nASP.NET [0.2%] \nVuejs Component [0.2%] \nMustache [0.2%] \npeg.js [0.2%] \nWindows Module Definition [0.2%] \nAsciiDoc [0.2%] \nCoffeeScript [0.2%] \nEJS [0.2%] \nCucumber [0.2%] \nTOML [0.2%] \nMaven [0.2%] \nPEG [0.2%] \nArduino Sketch [0.2%] \nD [0.2%] \nFXML [0.2%] \nVisual Studio Solution [0.2%] \nvim script [0.2%] \nNix [0.2%] \nAnt [0.2%] \nHandlebars [0.2%] \n```\n
+<!-- END_SECTION:language-usage -->
 <!-- END_SECTION:language-usage -->
