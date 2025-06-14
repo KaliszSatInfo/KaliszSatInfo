@@ -20,13 +20,16 @@ jobs:
           USAGE_CONTENT=$(sed 's/\\/\\\\/g; s/&/\\&/g; s/`/\\`/g' language-usage.md | sed ':a;N;$!ba;s/\n/\\n/g')
           echo "usage=$USAGE_CONTENT" >> $GITHUB_OUTPUT
 
+      - name: Debug language usage content
+        run: echo "${{ steps.read_usage.outputs.usage }}"
+
+
       - name: Update README.md
         run: |
-          awk -v usage="${{ steps.read_usage.outputs.usage }}" '
-            BEGIN {start=0}
-            /<!-- LANGUAGE-USAGE-START -->/ {print; print "```"; print usage; print "```"; start=1; next}
-            /<!-- LANGUAGE-USAGE-END -->/ {print; start=0; next}
-            start==0 {print}
+          awk '
+            /<!-- LANGUAGE-USAGE-START -->/ {print; print "```"; print "Hello, world!"; print "```"; next}
+            /<!-- LANGUAGE-USAGE-END -->/ {print; next}
+            {print}
           ' README.md > README.md.tmp
           mv README.md.tmp README.md
 
