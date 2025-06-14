@@ -79,24 +79,35 @@ def compute_weighted_usage(language_lines, repo_count):
 
     return dict(sorted(weighted.items(), key=lambda x: x[1], reverse=True))
 
-def generate_markdown(weighted):
-    bar = ""
-    text = "### 📊 **Weighted Language Usage**\n\n"
-    total = sum(weighted.values())
+def update_readme(content):
+    start_marker = "<!-- START_SECTION:language-usage -->"
+    end_marker = "<!-- END_SECTION:language-usage -->"
 
-    for lang, score in weighted.items():
-        percent = round(score / total * 100, 1)
-        bar += f"{lang} [{percent}%] " + "█" * int(percent / 5) + "\n"
-    
-    with open("language-usage.md", "w") as f:
-        f.write(text + "```\n" + bar + "```\n")
+    with open("README.md", "r") as f:
+        readme = f.read()
+
+    before = readme.split(start_marker)[0]
+    after = readme.split(end_marker)[1]
+
+    new_readme = before + start_marker + "\n" + content + "\n" + end_marker + after
+
+    with open("README.md", "w") as f:
+        f.write(new_readme)
 
 def main():
     reset_temp_dir()
     repos = fetch_repos(GITHUB_USERNAME) + sum([fetch_repos(org, is_org=True) for org in ORGS], [])
     language_lines, repo_count = aggregate_language_data(repos)
     weighted = compute_weighted_usage(language_lines, repo_count)
-    generate_markdown(weighted)
+
+    bar = ""
+    total = sum(weighted.values())
+    for lang, score in weighted.items():
+        percent = round(score / total * 100, 1) if total else 0
+        bar += f"{lang} [{percent}%] " + "█" * int(percent / 5) + "\n"
+
+    markdown_content = "### 📊 **Weighted Language Usage**\n\n```\n" + bar + "```\n"
+    update_readme(markdown_content)
 
 if __name__ == "__main__":
     main()
