@@ -44,12 +44,41 @@ def clone_repo(git_url, name):
     return target_path
 
 def run_cloc(path):
+    exclude_dirs = [
+        "node_modules", "dist", "build", "out", ".next", ".output", "target", "vendor",
+        "__pycache__", "storage", "var", "generated", "bin", "obj", "cache", ".venv",
+        ".mypy_cache", ".pytest_cache", ".gradle", ".idea", ".dart_tool", "gen",
+        "Packages", "Pods", "Carthage", ".parcel-cache"
+    ]
+
+    exclude_dir_str = ",".join(exclude_dirs)
+
+    not_match_f = (
+        r".*\.min\..*|"
+        r".*\.map$|"
+        r".*\.d\.ts$|"
+        r".*\.pyc$|"
+        r".*\.class$|"
+        r".*\.dll$|"
+        r".*\.exe$|"
+        r".*\.jar$|"
+        r".*\.war$|"
+        r".*\.ear$|"
+        r".*\.so$|"
+        r".*\.a$|"
+        r".*\.o$|"
+        r".*\.hi$|"
+        r".*\.bc$|"
+        r".*\.tsbuildinfo$"
+    )
+
     result = subprocess.run([
         "cloc", path,
         "--json",
-        "--exclude-dir=node_modules,dist,build,out,.next,.output,target,vendor",
-        "--not-match-f='.*\\.min\\..*|.*\\.map$|.*\\.d\\.ts$|.*\\.class$|.*\\.pyc$'"
+        f"--exclude-dir={exclude_dir_str}",
+        f"--not-match-f={not_match_f}"
     ], capture_output=True, text=True)
+
     try:
         cloc_data = json.loads(result.stdout)
         return cloc_data
