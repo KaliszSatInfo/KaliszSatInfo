@@ -39,11 +39,12 @@
 
 | Language | Adjusted % | Repos Using | Total LOC |
 | --- | ---: | ---: | ---: |
-| PHP | 50.09% | 10 | 1010403 |
-| JavaScript | 33.32% | 12 | 660116 |
-| CSS | 7.66% | 12 | 111816 |
-| HTML | 6.52% | 13 | 126913 |
-| Java | 0.59% | 36 | 6081 |
-| TypeScript | 0.23% | 1 | 2379 |
-| Python | 0.07% | 3 | 1197 |
+| PHP | 45.2% | 8 | 1010353 |
+| JavaScript | 30.07% | 11 | 660079 |
+| JSON | 9.8% | 5 | 2034099 |
+| CSS | 6.91% | 12 | 111816 |
+| HTML | 5.87% | 6 | 126774 |
+| Java | 0.5% | 24 | 5724 |
+| TypeScript | 0.21% | 1 | 2379 |
+| Python | 0.06% | 2 | 1198 |
 <!-- END_SECTION:language-usage -->
