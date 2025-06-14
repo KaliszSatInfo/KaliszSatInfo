@@ -72,52 +72,59 @@ def apply_penalty_formula(repo_language_data):
     penalty_heavy = 0.02
     penalty_generated = 0.1
     penalty_neutral = 1.0
-    penalty_boost = 1.5
-
+    penalty_boost = 1.0
+    
     heavily_penalized = {
         "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text",
         "C", "C++", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
         "C/C++ Header", "Arduino Sketch", "Visual Studio Solution", "CSV", "Ant"
     }
-
+    
     generated_or_config = {
         "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
         "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
         "vim script", "diff", "Handlebars"
     }
-
-    boosted_langs = {
-        "JavaScript", "TypeScript", "Python", "PHP", "Java", "C#", "HTML",
-        "CSS", "SQL", "make", "EJS", "Vuejs Component", "ASP.NET",
-        "Bourne Shell", "Bourne Again Shell"
-    }
-
+    
+    boosted_langs = set()
+    
     adjusted_scores = defaultdict(float)
-
+    
     repo_sizes = {repo: sum(langs.values()) for repo, langs in repo_language_data.items()}
     max_repo_size = max(repo_sizes.values()) if repo_sizes else 1
-
+    
     for repo, langs in repo_language_data.items():
         repo_size = repo_sizes[repo]
         size_penalty = 1 / (1 + (repo_size / max_repo_size) ** 2.5)
-
+        
         for lang, loc in langs.items():
             if lang in heavily_penalized:
                 factor = penalty_heavy
             elif lang in generated_or_config:
                 factor = penalty_generated
-            elif lang in boosted_langs:
-                factor = penalty_boost
             else:
                 factor = penalty_neutral
-
+            
             adjusted_score = loc * factor * size_penalty
+            
+            if lang == "Java":
+                adjusted_score *= 7.5
+            elif lang == "TypeScript":
+                adjusted_score *= 1.7
+            elif lang == "JavaScript":
+                adjusted_score *= 0.5
+            elif lang == "Python":
+                adjusted_score *= 1.2
+            elif lang == "C#":
+                adjusted_score *= 1.3
+            
             adjusted_scores[lang] += adjusted_score
-
+    
     total = sum(adjusted_scores.values())
     normalized = {lang: round(score / total * 100, 2)
                   for lang, score in adjusted_scores.items() if score > 0.5}
     return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
+
 
 def generate_markdown_adjusted(normalized_scores):
     lines = ["### 📊 Language Usage (Adjusted with Penalties)\n"]
