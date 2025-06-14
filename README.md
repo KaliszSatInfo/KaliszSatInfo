@@ -45,5 +45,6 @@
 | CSS | 6.68% |
 | HTML | 5.68% |
 | Java | 0.52% |
+| TypeScript | 0.2% |
 | Python | 0.05% |
 <!-- END_SECTION:language-usage -->
