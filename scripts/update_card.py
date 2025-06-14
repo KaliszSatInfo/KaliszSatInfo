@@ -47,8 +47,8 @@ def run_cloc(path):
     result = subprocess.run([
         "cloc", path,
         "--json",
-        "--exclude-dir=node_modules,dist,build,out,.next,.vercel",
-        "--not-match-f=.*\\.min\\.js$"
+        "--exclude-dir=node_modules,dist,build,out,.next,.output,target,vendor",
+        "--not-match-f='.*\\.min\\..*|.*\\.map$|.*\\.d\\.ts$|.*\\.class$|.*\\.pyc$'"
     ], capture_output=True, text=True)
     try:
         cloc_data = json.loads(result.stdout)
