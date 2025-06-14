@@ -35,27 +35,80 @@
 </table>
 
 <!-- START_SECTION:language-usage -->
-### 📊 Language Usage (Adjusted with Penalties)
+### Language Usage
 
 
 <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 320px; overflow-x: auto;">
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th style="text-align:right;">Adjusted %</th>
+          <th style="text-align:right;">Repos Using</th>
+          <th style="text-align:right;">Total LOC</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+            <td>PHP</td>
+            <td style="text-align:right;">50.11%</td>
+            <td style="text-align:right;">8</td>
+            <td style="text-align:right;">1010353</td>
+        </tr>
+        
+        <tr>
+            <td>JavaScript</td>
+            <td style="text-align:right;">33.34%</td>
+            <td style="text-align:right;">11</td>
+            <td style="text-align:right;">660079</td>
+        </tr>
+        
+        <tr>
+            <td>CSS</td>
+            <td style="text-align:right;">7.67%</td>
+            <td style="text-align:right;">12</td>
+            <td style="text-align:right;">111816</td>
+        </tr>
+        
+        <tr>
+            <td>HTML</td>
+            <td style="text-align:right;">6.51%</td>
+            <td style="text-align:right;">6</td>
+            <td style="text-align:right;">126774</td>
+        </tr>
+        
+        <tr>
+            <td>Java</td>
+            <td style="text-align:right;">0.56%</td>
+            <td style="text-align:right;">24</td>
+            <td style="text-align:right;">5724</td>
+        </tr>
+        
+        <tr>
+            <td>TypeScript</td>
+            <td style="text-align:right;">0.23%</td>
+            <td style="text-align:right;">1</td>
+            <td style="text-align:right;">2379</td>
+        </tr>
+        
+        <tr>
+            <td>Python</td>
+            <td style="text-align:right;">0.07%</td>
+            <td style="text-align:right;">3</td>
+            <td style="text-align:right;">1230</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </div>
 
-<div style="flex: 1; min-width: 320px; overflow-x: auto;">
-| Language   | Adjusted % | Repos Using | Total LOC |
-|------------|-----------:|------------:|----------:|
-| PHP | 50.11% | 8 | 1010353 |
-| JavaScript | 33.34% | 11 | 660079 |
-| CSS | 7.67% | 12 | 111816 |
-| HTML | 6.51% | 6 | 126774 |
-| Java | 0.56% | 24 | 5724 |
-| TypeScript | 0.23% | 1 | 2379 |
-| Python | 0.07% | 3 | 1233 |
-</div>
-
-<div style="flex: 1; min-width: 320px;">
-<img src="language_usage_pie.png" alt="Language Usage Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;" />
-</div>
-
+  <div style="flex: 1; min-width: 320px;">
+    <img src="language_usage_pie.png" alt="Language Usage Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;" />
+  </div>
 </div>
 
 <!-- END_SECTION:language-usage -->
