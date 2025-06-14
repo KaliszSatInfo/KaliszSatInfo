@@ -19,7 +19,6 @@ jobs:
         run: |
           echo 'usage<<EOF' >> $GITHUB_OUTPUT
 
-          # Process the usage lines
           grep -E '\[[0-9]+\.[0-9]+%\]' language-usage.md |
           awk '
             match($0, /\[([0-9.]+)%\]/, m) {
@@ -32,7 +31,6 @@ jobs:
               }
             }
             END {
-              # Sort by percentage descending
               n = asorti(usage, sorted, "@val_num_desc");
               limit = (n < 10 ? n : 10);
 
@@ -51,26 +49,42 @@ jobs:
 
           echo 'EOF' >> $GITHUB_OUTPUT
 
-      - name: Debug formatted usage
-        run: echo "${{ steps.format_usage.outputs.usage }}"
-
       - name: Update README.md
         run: |
           usage_content="${{ steps.format_usage.outputs.usage }}"
+          echo "$usage_content" > usage_content.txt
           start="<!-- START_SECTION:language-usage -->"
           end="<!-- END_SECTION:language-usage -->"
-          esc_usage=$(printf '%s\n' "$usage_content" | sed 's/[&/\]/\\&/g')
-          awk -v start="$start" -v end="$end" -v content="$esc_usage" '
-            BEGIN { print_start=1 }
+
+          awk -v start="$start" -v end="$end" '
+            BEGIN {
+              while ((getline line < "usage_content.txt") > 0) {
+                content = content line "\n"
+              }
+              close("usage_content.txt")
+              print_start = 1
+            }
             {
               if ($0 ~ start) {
-                print; print content; print_start=0; skip=1; next
+                print
+                printf "%s", content
+                print_start = 0
+                skip = 1
+                next
               }
-              if ($0 ~ end) { print_start=1; skip=0 }
-              if (print_start && !skip) print
-              if ($0 ~ end) print
+              if ($0 ~ end) {
+                print_start = 1
+                skip = 0
+              }
+              if (print_start && !skip)
+                print
+              if ($0 ~ end)
+                print
             }
           ' README.md > README.tmp && mv README.tmp README.md
+          
+          rm usage_content.txt
+
 
       - name: Commit and push changes
         run: |
