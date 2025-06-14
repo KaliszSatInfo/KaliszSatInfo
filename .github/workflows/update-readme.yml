@@ -14,20 +14,49 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Read language usage
-        id: read_usage
+      - name: Generate formatted usage block
+        id: format_usage
         run: |
-          USAGE_CONTENT=$(awk '{ printf "%s\\n", $0 }' language-usage.md)
-          echo "usage=$USAGE_CONTENT" >> $GITHUB_OUTPUT
+          echo 'usage<<EOF' >> $GITHUB_OUTPUT
 
+          # Process the usage lines
+          grep -E '\[[0-9]+\.[0-9]+%\]' language-usage.md |
+          awk '
+            match($0, /\[([0-9.]+)%\]/, m) {
+              lang = substr($0, 1, RSTART - 2);
+              pct = m[1] + 0;
+              if (pct >= 1) {
+                usage[lang] = pct;
+                total++;
+                if (pct > max_pct) max_pct = pct;
+              }
+            }
+            END {
+              # Sort by percentage descending
+              n = asorti(usage, sorted, "@val_num_desc");
+              limit = (n < 10 ? n : 10);
 
-      - name: Debug language usage content
-        run: echo "${{ steps.read_usage.outputs.usage }}"
+              printf "### 📊 **Weighted Language Usage**\n\n\`\`\`\n";
+              for (i = 1; i <= limit; i++) {
+                lang = sorted[i];
+                pct = usage[lang];
+                barlen = int((pct / max_pct) * 10);
+                bar = "";
+                for (j = 0; j < barlen; j++) bar = bar "█";
+                printf "%-22s [%4.1f%%] %s\n", lang, pct, bar;
+              }
+              print "```";
+            }
+          ' >> $GITHUB_OUTPUT
 
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Debug formatted usage
+        run: echo "${{ steps.format_usage.outputs.usage }}"
 
       - name: Update README.md
         run: |
-          usage_content=$(awk '{ printf "%s\\n", $0 }' language-usage.md)
+          usage_content="${{ steps.format_usage.outputs.usage }}"
           start="<!-- START_SECTION:language-usage -->"
           end="<!-- END_SECTION:language-usage -->"
           esc_usage=$(printf '%s\n' "$usage_content" | sed 's/[&/\]/\\&/g')
@@ -42,7 +71,6 @@ jobs:
               if ($0 ~ end) print
             }
           ' README.md > README.tmp && mv README.tmp README.md
-
 
       - name: Commit and push changes
         run: |
