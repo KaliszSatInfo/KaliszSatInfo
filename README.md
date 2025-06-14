@@ -40,62 +40,58 @@
 </p>
 
 <!-- START_SECTION:language-usage -->
-### 📊 Language Usage (Raw Lines of Code)
+### 📊 Language Usage (Adjusted with Penalties)
 
-| Language | Lines of Code |
+| Language | Adjusted % |
 | --- | ---: |
-| JSON | 3094809 |
-| JavaScript | 2971968 |
-| PHP | 1558572 |
-| SQL | 458556 |
-| YAML | 304452 |
-| CSS | 234119 |
-| Markdown | 187158 |
-| TypeScript | 186386 |
-| HTML | 140569 |
-| Text | 97822 |
-| LESS | 50590 |
-| SCSS | 30274 |
-| C | 28240 |
-| Python | 25543 |
-| SVG | 24079 |
-| Lua | 22592 |
-| C/C++ Header | 16999 |
-| XML | 14133 |
-| INI | 13509 |
-| Java | 6020 |
-| Unity-Prefab | 4180 |
-| C# | 3850 |
-| C++ | 3702 |
-| HLSL | 2860 |
-| Bourne Shell | 2253 |
-| XSD | 2018 |
-| ASP.NET | 1577 |
-| Vuejs Component | 1544 |
-| Mustache | 1140 |
-| make | 795 |
-| peg.js | 578 |
-| Windows Module Definition | 513 |
-| DOS Batch | 183 |
-| AsciiDoc | 124 |
-| CoffeeScript | 112 |
-| reStructuredText | 103 |
-| EJS | 101 |
-| Properties | 99 |
-| Cucumber | 94 |
-| TOML | 82 |
-| Bourne Again Shell | 81 |
-| Maven | 79 |
-| PEG | 59 |
-| Arduino Sketch | 56 |
-| PowerShell | 30 |
-| D | 25 |
-| FXML | 24 |
-| Visual Studio Solution | 24 |
-| vim script | 23 |
-| Nix | 19 |
-| diff | 18 |
-| CSV | 10 |
-| Ant | 5 |
-| Handlebars | 1 |
+| JavaScript | 52.87% |
+| PHP | 22.86% |
+| SQL | 11.69% |
+| CSS | 5.16% |
+| TypeScript | 3.51% |
+| HTML | 2.05% |
+| JSON | 0.67% |
+| Python | 0.48% |
+| Java | 0.16% |
+| C# | 0.1% |
+| YAML | 0.1% |
+| LESS | 0.06% |
+| Markdown | 0.05% |
+| SCSS | 0.05% |
+| ASP.NET | 0.04% |
+| Bourne Shell | 0.04% |
+| Text | 0.02% |
+| Vuejs Component | 0.02% |
+| Unity-Prefab | 0.01% |
+| SVG | 0.01% |
+| make | 0.01% |
+| Mustache | 0.01% |
+| C | 0.01% |
+| INI | 0.0% |
+| HLSL | 0.0% |
+| XML | 0.0% |
+| PowerShell | 0.0% |
+| DOS Batch | 0.0% |
+| Maven | 0.0% |
+| FXML | 0.0% |
+| Properties | 0.0% |
+| XSD | 0.0% |
+| reStructuredText | 0.0% |
+| diff | 0.0% |
+| Lua | 0.0% |
+| peg.js | 0.0% |
+| AsciiDoc | 0.0% |
+| EJS | 0.0% |
+| Cucumber | 0.0% |
+| PEG | 0.0% |
+| Bourne Again Shell | 0.0% |
+| vim script | 0.0% |
+| Arduino Sketch | 0.0% |
+| C/C++ Header | 0.0% |
+| C++ | 0.0% |
+| Windows Module Definition | 0.0% |
+| CoffeeScript | 0.0% |
+| TOML | 0.0% |
+| D | 0.0% |
+| Nix | 0.0% |
 <!-- END_SECTION:language-usage -->
