@@ -28,7 +28,7 @@ jobs:
       - name: Run stats script
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: python scripts/update_language_card.py
+        run: python scripts/update_card.py
 
       - name: Commit and push changes
         run: |
