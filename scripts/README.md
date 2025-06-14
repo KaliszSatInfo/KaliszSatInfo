@@ -3,7 +3,7 @@ $$
 $$
 
 $$
-\text{SizePenalty}(R) = \frac{1}{1 + \left(\frac{S_R}{S_{\text{max}}}\right)^{2.5}}
+\text{SizePenalty}(R) = \frac{1}{1 + \left(\frac{S_R}{S_{\max}}\right)^{2.5}}
 $$
 
 $$
@@ -12,4 +12,12 @@ $$
 
 $$
 \text{Percentage}(L) = \left( \frac{\text{Score}(L)}{\sum_{L} \text{Score}(L)} \right) \times 100
+$$
+
+$$
+\text{PenaltyFactor}(L) = \begin{cases}
+0.02 & \text{for heavily penalized languages} \\
+0.1 & \text{for generated or config languages} \\
+1.0 & \text{otherwise}
+\end{cases}
 $$
