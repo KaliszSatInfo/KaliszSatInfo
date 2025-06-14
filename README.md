@@ -40,63 +40,62 @@
 </p>
 
 <!-- START_SECTION:language-usage -->
-### 📊 **Weighted Language Usage**
+### 📊 Language Usage (Raw Lines of Code)
 
-```
-JavaScript [12.8%] ██
-JSON [12.7%] ██
-XML [10.8%] ██
-Java [8.6%] █
-Text [8.1%] █
-PHP [7.6%] █
-Markdown [5.0%] █
-CSS [4.2%] 
-HTML [3.6%] 
-YAML [2.9%] 
-SQL [2.4%] 
-SVG [2.0%] 
-LESS [1.4%] 
-TypeScript [1.3%] 
-INI [1.3%] 
-Python [1.1%] 
-Bourne Shell [1.0%] 
-DOS Batch [1.0%] 
-SCSS [0.8%] 
-make [0.7%] 
-C# [0.5%] 
-XSD [0.5%] 
-reStructuredText [0.5%] 
-Properties [0.5%] 
-Bourne Again Shell [0.5%] 
-PowerShell [0.5%] 
-diff [0.5%] 
-CSV [0.5%] 
-C [0.3%] 
-Lua [0.3%] 
-C/C++ Header [0.3%] 
-Unity-Prefab [0.3%] 
-C++ [0.3%] 
-HLSL [0.3%] 
-ASP.NET [0.2%] 
-Vuejs Component [0.2%] 
-Mustache [0.2%] 
-peg.js [0.2%] 
-Windows Module Definition [0.2%] 
-AsciiDoc [0.2%] 
-CoffeeScript [0.2%] 
-EJS [0.2%] 
-Cucumber [0.2%] 
-TOML [0.2%] 
-Maven [0.2%] 
-PEG [0.2%] 
-Arduino Sketch [0.2%] 
-D [0.2%] 
-FXML [0.2%] 
-Visual Studio Solution [0.2%] 
-vim script [0.2%] 
-Nix [0.2%] 
-Ant [0.2%] 
-Handlebars [0.2%] 
-```
-
+| Language | Lines of Code |
+| --- | ---: |
+| JSON | 3094809 |
+| JavaScript | 2971968 |
+| PHP | 1558572 |
+| SQL | 458556 |
+| YAML | 304452 |
+| CSS | 234119 |
+| Markdown | 187158 |
+| TypeScript | 186386 |
+| HTML | 140569 |
+| Text | 97822 |
+| LESS | 50590 |
+| SCSS | 30274 |
+| C | 28240 |
+| Python | 25543 |
+| SVG | 24079 |
+| Lua | 22592 |
+| C/C++ Header | 16999 |
+| XML | 14133 |
+| INI | 13509 |
+| Java | 6020 |
+| Unity-Prefab | 4180 |
+| C# | 3850 |
+| C++ | 3702 |
+| HLSL | 2860 |
+| Bourne Shell | 2253 |
+| XSD | 2018 |
+| ASP.NET | 1577 |
+| Vuejs Component | 1544 |
+| Mustache | 1140 |
+| make | 795 |
+| peg.js | 578 |
+| Windows Module Definition | 513 |
+| DOS Batch | 183 |
+| AsciiDoc | 124 |
+| CoffeeScript | 112 |
+| reStructuredText | 103 |
+| EJS | 101 |
+| Properties | 99 |
+| Cucumber | 94 |
+| TOML | 82 |
+| Bourne Again Shell | 81 |
+| Maven | 79 |
+| PEG | 59 |
+| Arduino Sketch | 56 |
+| PowerShell | 30 |
+| D | 25 |
+| FXML | 24 |
+| Visual Studio Solution | 24 |
+| vim script | 23 |
+| Nix | 19 |
+| diff | 18 |
+| CSV | 10 |
+| Ant | 5 |
+| Handlebars | 1 |
 <!-- END_SECTION:language-usage -->
