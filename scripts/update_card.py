@@ -197,32 +197,48 @@ def generate_language_pie_chart(normalized_scores, output_path=PIE_IMAGE_PATH):
     plt.close()
 
 
-def generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums, pie_chart_path=PIE_IMAGE_PATH):
-    table_lines = [
-        "| Language   | Adjusted % | Repos Using | Total LOC |",
-        "|------------|-----------:|------------:|----------:|"
-    ]
+def generate_html_with_image_and_table(normalized_scores, repo_counts, loc_sums, pie_chart_path=PIE_IMAGE_PATH):
+    rows = []
     for lang, percent in normalized_scores.items():
         repos = repo_counts.get(lang, 0)
         loc = loc_sums.get(lang, 0)
-        table_lines.append(f"| {lang} | {percent}% | {repos} | {loc} |")
-    table_md = "\n".join(table_lines)
+        rows.append(f"""
+        <tr>
+            <td>{lang}</td>
+            <td style="text-align:right;">{percent}%</td>
+            <td style="text-align:right;">{repos}</td>
+            <td style="text-align:right;">{loc}</td>
+        </tr>
+        """)
 
-    combined_md = f"""
+    table_html = f"""
+    <table>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th style="text-align:right;">Adjusted %</th>
+          <th style="text-align:right;">Repos Using</th>
+          <th style="text-align:right;">Total LOC</th>
+        </tr>
+      </thead>
+      <tbody>
+        {''.join(rows)}
+      </tbody>
+    </table>
+    """
+
+    combined_html = f"""
 <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 320px; overflow-x: auto;">
+    {table_html}
+  </div>
 
-<div style="flex: 1; min-width: 320px; overflow-x: auto;">
-{table_md}
-</div>
-
-<div style="flex: 1; min-width: 320px;">
-<img src="{pie_chart_path}" alt="Language Usage Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;" />
-</div>
-
+  <div style="flex: 1; min-width: 320px;">
+    <img src="{pie_chart_path}" alt="Language Usage Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;" />
+  </div>
 </div>
 """
-    return "### 📊 Language Usage (Adjusted with Penalties)\n\n" + combined_md
-
+    return "### Language Usage\n\n" + combined_html
 
 def update_readme(content):
     start_marker = "<!-- START_SECTION:language-usage -->"
@@ -249,7 +265,7 @@ def main():
 
     generate_language_pie_chart(normalized_scores)
 
-    markdown_content = generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums)
+    markdown_content = generate_html_with_image_and_table(normalized_scores, repo_counts, loc_sums)
     update_readme(markdown_content)
 
 
