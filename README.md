@@ -1,4 +1,4 @@
-<h3>Things I tried, know and so on:</h3>
+<h2>Things I tried, know and so on:</h2>
 <table>
   <tr>
     <td align="center">
@@ -39,5 +39,7 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaliszsatinfo&layout=compact&langs_count=10&theme=github_dark"/>
 </p>
 
-<!--START_LANGUAGE_CARD-->
-<!--END_LANGUAGE_CARD-->
+## Language Usage
+
+<!--LANGUAGE-USAGE-START-->
+<!--LANGUAGE-USAGE-END-->
