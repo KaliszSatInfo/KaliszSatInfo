@@ -39,54 +39,43 @@
 
 | Language | Adjusted % |
 | --- | ---: |
-| JavaScript | 34.04% |
-| PHP | 29.43% |
-| SQL | 15.05% |
-| TypeScript | 7.69% |
-| CSS | 6.64% |
-| HTML | 2.64% |
-| Java | 1.5% |
-| JSON | 1.3% |
-| Python | 0.74% |
-| YAML | 0.2% |
-| C# | 0.16% |
-| LESS | 0.12% |
-| SCSS | 0.1% |
-| Markdown | 0.09% |
-| ASP.NET | 0.05% |
-| Bourne Shell | 0.05% |
-| Text | 0.03% |
-| Vuejs Component | 0.03% |
-| make | 0.02% |
-| Mustache | 0.02% |
-| INI | 0.01% |
-| Unity-Prefab | 0.01% |
-| XML | 0.01% |
-| SVG | 0.01% |
-| Lua | 0.01% |
-| C | 0.01% |
-| C/C++ Header | 0.01% |
+| PHP | 41.07% |
+| JavaScript | 33.97% |
+| CSS | 14.68% |
+| HTML | 5.32% |
+| JSON | 2.43% |
+| Java | 0.48% |
+| SQL | 0.39% |
+| YAML | 0.32% |
+| C# | 0.29% |
+| LESS | 0.23% |
+| TypeScript | 0.19% |
+| ASP.NET | 0.13% |
+| SCSS | 0.11% |
+| Vuejs Component | 0.06% |
+| Text | 0.05% |
+| Python | 0.05% |
+| Mustache | 0.05% |
+| Unity-Prefab | 0.03% |
+| SVG | 0.03% |
+| Bourne Shell | 0.03% |
+| INI | 0.02% |
+| XML | 0.02% |
+| Markdown | 0.02% |
+| Lua | 0.02% |
 | HLSL | 0.0% |
-| PowerShell | 0.0% |
 | DOS Batch | 0.0% |
 | Maven | 0.0% |
 | FXML | 0.0% |
 | Properties | 0.0% |
 | XSD | 0.0% |
-| reStructuredText | 0.0% |
-| diff | 0.0% |
 | peg.js | 0.0% |
 | AsciiDoc | 0.0% |
 | EJS | 0.0% |
 | Cucumber | 0.0% |
 | PEG | 0.0% |
 | Bourne Again Shell | 0.0% |
-| vim script | 0.0% |
+| make | 0.0% |
+| diff | 0.0% |
 | Arduino Sketch | 0.0% |
-| C++ | 0.0% |
-| Windows Module Definition | 0.0% |
-| CoffeeScript | 0.0% |
-| TOML | 0.0% |
-| D | 0.0% |
-| Nix | 0.0% |
 <!-- END_SECTION:language-usage -->
