@@ -47,7 +47,8 @@ def run_cloc(path):
     result = subprocess.run([
         "cloc", path,
         "--json",
-        "--exclude-dir=node_modules,dist,build,out,.next,.vercel"
+        "--exclude-dir=node_modules,dist,build,out,.next,.vercel",
+        "--not-match-f=.*\\.min\\.js$"
     ], capture_output=True, text=True)
     try:
         cloc_data = json.loads(result.stdout)
@@ -118,7 +119,7 @@ def apply_penalty_formula(repo_language_data):
     normalized = {}
     for lang, score in adjusted_scores.items():
         percent = round(score / total * 100, 2)
-        if percent > 0.5 or lang in {"Python", "TypeScript"}:
+        if percent > 0.5 or lang in {"Python", "TypeScript" "Java"}:
             normalized[lang] = percent
     return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
 
