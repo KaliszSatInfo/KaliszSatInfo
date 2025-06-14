@@ -197,48 +197,21 @@ def generate_language_pie_chart(normalized_scores, output_path=PIE_IMAGE_PATH):
     plt.close()
 
 
-def generate_html_with_image_and_table(normalized_scores, repo_counts, loc_sums, pie_chart_path=PIE_IMAGE_PATH):
-    rows = []
+def generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums, pie_chart_path=PIE_IMAGE_PATH):
+    lines = [
+        "### 📊 Language Usage (Adjusted with Penalties)",
+        "",
+        "| Language   | Adjusted % | Repos Using | Total LOC |",
+        "|------------|-----------:|------------:|----------:|"
+    ]
     for lang, percent in normalized_scores.items():
         repos = repo_counts.get(lang, 0)
         loc = loc_sums.get(lang, 0)
-        rows.append(f"""
-        <tr>
-            <td>{lang}</td>
-            <td style="text-align:right;">{percent}%</td>
-            <td style="text-align:right;">{repos}</td>
-            <td style="text-align:right;">{loc}</td>
-        </tr>
-        """)
+        lines.append(f"| {lang} | {percent}% | {repos} | {loc} |")
 
-    table_html = f"""
-    <table>
-      <thead>
-        <tr>
-          <th>Language</th>
-          <th style="text-align:right;">Adjusted %</th>
-          <th style="text-align:right;">Repos Using</th>
-          <th style="text-align:right;">Total LOC</th>
-        </tr>
-      </thead>
-      <tbody>
-        {''.join(rows)}
-      </tbody>
-    </table>
-    """
-
-    combined_html = f"""
-<div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 320px; overflow-x: auto;">
-    {table_html}
-  </div>
-
-  <div style="flex: 1; min-width: 320px;">
-    <img src="{pie_chart_path}" alt="Language Usage Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;" />
-  </div>
-</div>
-"""
-    return "### Language Usage\n\n" + combined_html
+    lines.append("")
+    lines.append(f"![Language Usage Pie Chart]({pie_chart_path})")
+    return "\n".join(lines)
 
 def update_readme(content):
     start_marker = "<!-- START_SECTION:language-usage -->"
@@ -255,7 +228,6 @@ def update_readme(content):
     with open("README.md", "w", encoding="utf-8") as f:
         f.write(new_readme)
 
-
 def main():
     reset_temp_dir()
     repos = fetch_repos(GITHUB_USERNAME) + sum([fetch_repos(org, is_org=True) for org in ORGS], [])
@@ -265,7 +237,7 @@ def main():
 
     generate_language_pie_chart(normalized_scores)
 
-    markdown_content = generate_html_with_image_and_table(normalized_scores, repo_counts, loc_sums)
+    markdown_content = generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums)
     update_readme(markdown_content)
 
 
