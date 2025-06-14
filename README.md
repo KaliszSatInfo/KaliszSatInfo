@@ -35,7 +35,7 @@
 </table>
 
 <!-- START_SECTION:language-usage -->
-### 📊 Language Usage (Adjusted with Penalties)
+Language Usage
 
 | Language | Adjusted % | Repos Using | Total LOC |
 | --- | ---: | ---: | ---: |
