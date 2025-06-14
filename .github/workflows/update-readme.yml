@@ -17,14 +17,16 @@ jobs:
       - name: Generate formatted usage block
         id: format_usage
         run: |
-          echo "usage<<EOF" >> $GITHUB_OUTPUT
+          echo 'usage<<EOF' >> $GITHUB_OUTPUT
 
-          grep -E '\[[0-9]+\.[0-9]+%\]' language-usage.md | awk '
+          grep -E '\[[0-9]+\.[0-9]+%\]' language-usage.md |
+          awk '
             match($0, /\[([0-9.]+)%\]/, m) {
               lang = substr($0, 1, RSTART - 2);
               pct = m[1] + 0;
               if (pct >= 1) {
                 usage[lang] = pct;
+                total++;
                 if (pct > max_pct) max_pct = pct;
               }
             }
@@ -45,14 +47,15 @@ jobs:
             }
           ' >> $GITHUB_OUTPUT
 
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Update README.md
         run: |
-          usage_content="${{ steps.format_usage.outputs.usage }}"
-          printf "%s" "$usage_content" > usage_content.txt
+          cat <<'EOF' > usage_content.txt${{ steps.format_usage.outputs.usage }}EOF
+
           start="<!-- START_SECTION:language-usage -->"
           end="<!-- END_SECTION:language-usage -->"
+
           awk -v start="$start" -v end="$end" '
             BEGIN {
               while ((getline line < "usage_content.txt") > 0) {
@@ -79,6 +82,7 @@ jobs:
                 print
             }
           ' README.md > README.tmp && mv README.tmp README.md
+
           rm usage_content.txt
 
       - name: Commit and push changes
@@ -86,9 +90,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           git add README.md
-          if ! git diff --quiet && ! git diff --staged --quiet; then
-            git commit -m "Update README language usage"
-            git push
-          else
-            echo "No changes to commit"
-          fi
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update README language usage"
+          git push
