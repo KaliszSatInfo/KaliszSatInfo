@@ -22,7 +22,6 @@ jobs:
 
       - name: Update README.md
         run: |
-          # Replace content between markers in README.md with language usage content
           awk -v usage="${{ steps.read_usage.outputs.usage }}" '
             BEGIN {start=0}
             /<!-- LANGUAGE-USAGE-START -->/ {print; print "```"; print usage; print "```"; start=1; next}
