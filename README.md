@@ -45,36 +45,6 @@
 | HTML | 6.14% |
 | JSON | 2.05% |
 | Java | 0.56% |
-| SQL | 0.45% |
-| C# | 0.34% |
 | TypeScript | 0.22% |
-| ASP.NET | 0.14% |
-| LESS | 0.14% |
-| Vuejs Component | 0.07% |
-| Text | 0.06% |
 | Python | 0.06% |
-| Mustache | 0.05% |
-| Unity-Prefab | 0.04% |
-| Bourne Shell | 0.04% |
-| INI | 0.02% |
-| XML | 0.02% |
-| Markdown | 0.02% |
-| Lua | 0.02% |
-| HLSL | 0.01% |
-| SVG | 0.01% |
-| YAML | 0.01% |
-| DOS Batch | 0.0% |
-| Maven | 0.0% |
-| FXML | 0.0% |
-| Properties | 0.0% |
-| XSD | 0.0% |
-| peg.js | 0.0% |
-| AsciiDoc | 0.0% |
-| EJS | 0.0% |
-| Cucumber | 0.0% |
-| PEG | 0.0% |
-| Bourne Again Shell | 0.0% |
-| make | 0.0% |
-| diff | 0.0% |
-| Arduino Sketch | 0.0% |
 <!-- END_SECTION:language-usage -->
