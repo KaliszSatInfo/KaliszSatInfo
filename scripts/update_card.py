@@ -81,7 +81,7 @@ def apply_penalty_formula(repo_language_data):
     heavily_penalized = {
         "YAML", "Markdown", "SVG", "XML", "INI", "Text", 
         "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
-        "C/C++ Header", "Arduino Sketch", "Visual Studio Solution", "CSV", "Ant"
+        "C/C++ Header", "Visual Studio Solution", "CSV", "Ant"
     }
     
     generated_or_config = {
