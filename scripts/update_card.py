@@ -79,8 +79,8 @@ def apply_penalty_formula(repo_language_data):
     penalty_neutral = 1.0
     penalty_boost = 1.0
     heavily_penalized = {
-        "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text",
-        "C", "C++", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
+        "JSON", "YAML", "Markdown", "SVG", "XML", "INI", "Text", 
+        "C", "Lua", "HLSL", "XSD", "PowerShell", "DOS Batch",
         "C/C++ Header", "Arduino Sketch", "Visual Studio Solution", "CSV", "Ant"
     }
     
@@ -114,13 +114,12 @@ def apply_penalty_formula(repo_language_data):
             adjusted_scores[lang] += adjusted_score
     
     total = sum(adjusted_scores.values())
-   normalized = {}
+    normalized = {}
     for lang, score in adjusted_scores.items():
         percent = round(score / total * 100, 2)
         if percent > 0.5 or lang in {"Python", "TypeScript"}:
             normalized[lang] = percent
     return dict(sorted(normalized.items(), key=lambda x: x[1], reverse=True))
-
 
 def generate_markdown_adjusted(normalized_scores):
     lines = ["### 📊 Language Usage (Adjusted with Penalties)\n"]
