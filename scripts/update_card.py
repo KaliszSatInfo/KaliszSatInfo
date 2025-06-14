@@ -85,7 +85,7 @@ def run_cloc(path):
         return {}
 
 
-def aggregate_language_data(repos, min_loc_threshold=2500):
+def aggregate_language_data(repos, min_loc_threshold=50):
     repo_language_data = {}
     EXCEPTIONS = {"Python", "TypeScript"}
 
