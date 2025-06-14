@@ -17,8 +17,9 @@ jobs:
       - name: Read language usage
         id: read_usage
         run: |
-          USAGE_CONTENT=$(sed 's/\\/\\\\/g; s/&/\\&/g; s/`/\\`/g' language-usage.md | sed ':a;N;$!ba;s/\n/\\n/g')
+          USAGE_CONTENT=$(...)  # creates escaped, single-line usage block
           echo "usage=$USAGE_CONTENT" >> $GITHUB_OUTPUT
+
 
       - name: Debug language usage content
         run: echo "${{ steps.read_usage.outputs.usage }}"
@@ -26,12 +27,19 @@ jobs:
 
       - name: Update README.md
         run: |
-          awk '
-            /<!-- LANGUAGE-USAGE-START -->/ {print; print "```"; print "Hello, world!"; print "```"; next}
-            /<!-- LANGUAGE-USAGE-END -->/ {print; next}
-            {print}
+          awk -v usage="${{ steps.read_usage.outputs.usage }}" '
+            /<!-- LANGUAGE-USAGE-START -->/ {
+              print;
+              print "```";
+              print usage;
+              print "```";
+              next
+            }
+            /<!-- LANGUAGE-USAGE-END -->/ { print; next }
+            { print }
           ' README.md > README.md.tmp
           mv README.md.tmp README.md
+
 
       - name: Commit and push changes
         run: |
