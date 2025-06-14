@@ -27,18 +27,21 @@ jobs:
 
       - name: Update README.md
         run: |
-          awk -v usage="${{ steps.read_usage.outputs.usage }}" '
-            /<!-- LANGUAGE-USAGE-START -->/ {
-              print;
-              print "```";
-              print usage;
-              print "```";
-              next
+          usage_content=$(awk '{ printf "%s\\n", $0 }' language-usage.md)
+          start="<!-- START_SECTION:language-usage -->"
+          end="<!-- END_SECTION:language-usage -->"
+          esc_usage=$(printf '%s\n' "$usage_content" | sed 's/[&/\]/\\&/g')
+          awk -v start="$start" -v end="$end" -v content="$esc_usage" '
+            BEGIN { print_start=1 }
+            {
+              if ($0 ~ start) {
+                print; print content; print_start=0; skip=1; next
+              }
+              if ($0 ~ end) { print_start=1; skip=0 }
+              if (print_start && !skip) print
+              if ($0 ~ end) print
             }
-            /<!-- LANGUAGE-USAGE-END -->/ { print; next }
-            { print }
-          ' README.md > README.md.tmp
-          mv README.md.tmp README.md
+          ' README.md > README.tmp && mv README.tmp README.md
 
 
       - name: Commit and push changes
