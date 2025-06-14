@@ -37,14 +37,14 @@
 <!-- START_SECTION:language-usage -->
 ### 📊 Language Usage (Adjusted with Penalties)
 
-| Language | Adjusted % |
-| --- | ---: |
-| PHP | 45.18% |
-| JavaScript | 30.05% |
-| JSON | 9.8% |
-| CSS | 6.91% |
-| HTML | 5.88% |
-| Java | 0.53% |
-| TypeScript | 0.21% |
-| Python | 0.06% |
+| Language | Adjusted % | Repos Using | Total LOC |
+| --- | ---: | ---: | ---: |
+| PHP | 45.18% | 10 | 1010403 |
+| JavaScript | 30.05% | 12 | 660116 |
+| JSON | 9.8% | 10 | 2034303 |
+| CSS | 6.91% | 12 | 111816 |
+| HTML | 5.88% | 13 | 126913 |
+| Java | 0.53% | 36 | 6081 |
+| TypeScript | 0.21% | 1 | 2379 |
+| Python | 0.06% | 3 | 1196 |
 <!-- END_SECTION:language-usage -->
