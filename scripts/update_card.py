@@ -233,7 +233,7 @@ def main():
     normalized_scores = apply_penalty_formula(repo_language_data)
     repo_counts, loc_sums = compute_language_stats(repo_language_data)
 
-    for lang in ["JSON", "ASP.NET", "Unity-Prefab"]:
+for lang in ["JSON", "ASP.NET", "Unity-Prefab"]:
     normalized_scores.pop(lang, None)
     repo_counts.pop(lang, None)
     loc_sums.pop(lang, None)
