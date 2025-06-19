@@ -4,6 +4,7 @@ import requests
 import json
 from collections import defaultdict
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 GITHUB_USERNAME = "KaliszSatInfo"
 ORGS = ["SchoolStuffProjects"]
