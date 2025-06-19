@@ -4,6 +4,7 @@ import requests
 import json
 from collections import defaultdict
 import matplotlib.pyplot as plt
+from matplotlib import colormaps
 
 GITHUB_USERNAME = "KaliszSatInfo"
 ORGS = ["SchoolStuffProjects"]
@@ -173,9 +174,9 @@ def generate_language_bar_image(normalized_scores):
     labels = list(normalized_scores.keys())
     sizes = list(normalized_scores.values())
 
-    cmap = plt.colormaps.get_cmap('tab20', len(labels))
+    cmap = colormaps['tab20']
+    colors = [cmap(i / len(labels)) for i in range(len(labels))]
 
-    colors = [cmap(i) for i in range(len(labels))]
 
     fig, ax = plt.subplots(figsize=(8, 1.5))
     left = 0
