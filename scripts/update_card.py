@@ -172,24 +172,17 @@ def apply_penalty_formula(repo_language_data):
 def generate_language_bar_image(normalized_scores):
     labels = list(normalized_scores.keys())
     sizes = list(normalized_scores.values())
-    colors_map = {
-        "PHP": "#4caf50",
-        "JavaScript": "#2196f3",
-        "JSON": "#ff9800",
-        "CSS": "#9c27b0",
-        "HTML": "#f44336",
-        "Java": "#00bcd4",
-        "TypeScript": "#ff5722",
-        "Python": "#607d8b"
-    }
-    colors = [colors_map.get(lang, "#888888") for lang in labels]
+
+    cmap = cm.get_cmap('tab20', len(labels))
+
+    colors = [cmap(i) for i in range(len(labels))]
 
     fig, ax = plt.subplots(figsize=(8, 1.5))
     left = 0
     for i, (label, size) in enumerate(zip(labels, sizes)):
         ax.barh(0, size, left=left, color=colors[i])
         if size > 3:
-            ax.text(left + size / 2, 0, f"{label} {size:.1f}%", va='center', ha='center', color='white', fontsize=10)
+            ax.text(left + size / 2, 0, label, va='center', ha='center', color='white', fontsize=8)
         left += size
 
     ax.set_xlim(0, 100)
@@ -197,6 +190,7 @@ def generate_language_bar_image(normalized_scores):
     plt.tight_layout()
     plt.savefig(BAR_IMAGE_PATH, transparent=True, format='svg')
     plt.close()
+
 
 def generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums):
     lines = [
