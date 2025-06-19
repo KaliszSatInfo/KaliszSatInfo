@@ -138,7 +138,7 @@ def apply_penalty_formula(repo_language_data):
     generated_or_config = {
         "JSON", "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
         "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
-        "vim script", "diff", "Handlebars"
+        "vim script", "diff", "Handlebars", "CSS"
     }
 
     adjusted_scores = defaultdict(float)
