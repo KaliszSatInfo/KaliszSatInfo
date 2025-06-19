@@ -187,7 +187,7 @@ def generate_language_bar_image(normalized_scores):
     ax.set_xlim(0, 100)
     ax.axis('off')
     plt.tight_layout()
-    plt.savefig(BAR_IMAGE_PATH, dpi=150)
+    plt.savefig(BAR_IMAGE_PATH, dpi=150, transparent=True)
     plt.close()
 
 def generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums):
