@@ -37,7 +37,7 @@
 <!-- START_SECTION:language-usage -->
 ### Language Usage
 
-![Language Usage](language_usage_bar.png)
+![Language Usage](language_usage_bar.svg)
 
 | Language | Percentage | Repos | LOC |
 | --- | ---: | ---: | ---: |
