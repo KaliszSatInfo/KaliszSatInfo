@@ -90,7 +90,13 @@ def run_cloc(path):
 def aggregate_language_data(repos):
     repo_language_data = {}
 
+    excluded_repos = {"mediawiki"}
+
     for repo in repos:
+        if repo["name"] in excluded_repos:
+            print(f"Skipping: {repo['name']}")
+            continue
+
         print(f"Processing: {repo['name']}")
         path = clone_repo(repo["clone_url"], repo["name"])
         cloc_data = run_cloc(path)
@@ -104,6 +110,7 @@ def aggregate_language_data(repos):
         repo_language_data[repo["name"]] = language_lines
 
     return repo_language_data
+
 
 def compute_language_stats(repo_language_data):
     lang_repo_count = defaultdict(int)
