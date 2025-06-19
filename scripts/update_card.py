@@ -87,6 +87,8 @@ def run_cloc(path):
     except json.JSONDecodeError:
         return {}
 
+    find <repo_path> -name "*.css" -exec wc -l {} + | sort -nr | head -20
+
 def aggregate_language_data(repos):
     repo_language_data = {}
 
