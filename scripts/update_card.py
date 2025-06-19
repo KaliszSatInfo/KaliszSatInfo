@@ -174,7 +174,7 @@ def generate_language_bar_image(normalized_scores):
     labels = list(normalized_scores.keys())
     sizes = list(normalized_scores.values())
 
-    cmap = cm.get_cmap('tab20', len(labels))
+    cmap = matplotlib.colormaps.get_cmap('tab20', len(labels))
 
     colors = [cmap(i) for i in range(len(labels))]
 
