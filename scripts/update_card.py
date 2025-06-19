@@ -15,7 +15,8 @@ HEADERS = {
 }
 
 TEMP_DIR = "temp_repos"
-BAR_IMAGE_PATH = "language_usage_bar.png"
+BAR_IMAGE_PATH = "language_usage_bar.svg"
+
 
 def reset_temp_dir():
     if os.path.exists(TEMP_DIR):
@@ -187,7 +188,7 @@ def generate_language_bar_image(normalized_scores):
     ax.set_xlim(0, 100)
     ax.axis('off')
     plt.tight_layout()
-    plt.savefig(BAR_IMAGE_PATH, dpi=150, transparent=True)
+    plt.savefig(BAR_IMAGE_PATH, transparent=True, format='svg')
     plt.close()
 
 def generate_markdown_with_image_and_table(normalized_scores, repo_counts, loc_sums):
