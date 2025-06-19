@@ -41,12 +41,12 @@
 
 | Language | Percentage | Repos | LOC |
 | --- | ---: | ---: | ---: |
-| JavaScript | 31.27% | 11 | 23651 |
-| PHP | 24.12% | 9 | 17453 |
+| JavaScript | 31.28% | 11 | 23651 |
+| PHP | 24.13% | 9 | 17453 |
 | Java | 8.4% | 36 | 6081 |
-| HTML | 7.76% | 12 | 6843 |
+| HTML | 7.77% | 12 | 6843 |
 | CSS | 5.94% | 11 | 45414 |
 | C# | 5.03% | 1 | 3664 |
 | TypeScript | 1.64% | 1 | 2379 |
-| Python | 0.28% | 2 | 204 |
+| Python | 0.27% | 2 | 196 |
 <!-- END_SECTION:language-usage -->
