@@ -138,7 +138,7 @@ def apply_penalty_formula(repo_language_data):
     generated_or_config = {
         "JSON", "LESS", "SCSS", "Unity-Prefab", "peg.js", "Windows Module Definition", "AsciiDoc",
         "CoffeeScript", "reStructuredText", "Properties", "TOML", "Maven", "PEG", "FXML",
-        "vim script", "diff", "Handlebars", "CSS"
+        "vim script", "diff", "Handlebars", "CSS", "ASP.NET"
     }
 
     adjusted_scores = defaultdict(float)
@@ -233,9 +233,10 @@ def main():
     normalized_scores = apply_penalty_formula(repo_language_data)
     repo_counts, loc_sums = compute_language_stats(repo_language_data)
 
-    normalized_scores.pop("JSON", None)
-    repo_counts.pop("JSON", None)
-    loc_sums.pop("JSON", None)
+    for lang in ["JSON", "ASP.NET", "Unity-Prefab"]:
+    normalized_scores.pop(lang, None)
+    repo_counts.pop(lang, None)
+    loc_sums.pop(lang, None)
 
     generate_language_bar_image(normalized_scores)
 
