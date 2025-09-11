@@ -17,6 +17,7 @@
       <a href="https://www.typescriptlang.org/" target="_blank" title="TypeScript"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" width="50" height="50"/></a>
       <a href="https://nodejs.org" target="_blank" title="Node.js"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" width="50" height="50"/></a>
       <a href="https://angular.io" target="_blank" title="Angular"><img src="https://angular.io/assets/images/logos/angular/angular.svg" width="50" height="50"/></a>
+      <a href="https://www.electronjs.org/" target="_blank" title="Electron"> <img src="https://www.electronjs.org/assets/img/logo.svg" width="50" height="50"/></a>
     </td>
     <td style="border-left: 4px solid black;" align="center">
       <a href="https://www.w3schools.com/cs/" target="_blank" title="C#"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" width="50" height="50"/></a>
